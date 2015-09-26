@@ -24,10 +24,9 @@ Usage
 
     make run
 
-Tests
------
+To run just `mishearText` on the command line:
 
-Run tests with `make test`.
+    node tools/run-mishear-text.js "Your text to be misheard here."
 
 License
 -------

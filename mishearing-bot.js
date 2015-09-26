@@ -1,23 +1,13 @@
 var config = require('./config');
 var callNextTick = require('call-next-tick');
 var Twit = require('twit');
-var async = require('async');
-var MishearPhrase = require('mishear-phrase');
-var probable = require('probable');
+var mishearText = require('./mishear-text');
+var decorateMishearing = require('./decorate-mishearing');
 
 var dryRun = false;
 if (process.argv.length > 2) {
   dryRun = (process.argv[2].toLowerCase() == '--dry');
 }
-
-var mishearPhrase = MishearPhrase({
-  shouldMishearWord: function shouldMishearWord(word, done) {
-    callNextTick(done, null, word.length < 8 || probable.roll(3) === 0);
-  },
-  pickMishearing: function pickMishearing(mishearings, done) {
-    callNextTick(done, null, probable.pickFromArray(mishearings));
-  }
-});
 
 var twit = new Twit(config.twitter);
 var stream = twit.stream('user');
@@ -26,24 +16,30 @@ stream.on('tweet', reactToTweet);
 
 function reactToTweet(tweet) {
   // console.log(tweet.user.screen_name);
-  console.log(tweet.text);
+  // console.log(tweet.text);
   if (tweet.user.screen_name !== 'mishearingbot') {
-    attemptToMishear(tweet.text, tweet.user.screen_name);
+    mishearText(tweet.text, processMishearing);
   }
-}
 
-function attemptToMishear(text, username) {
-  mishearPhrase(text, packageMishearing);
-
-  function packageMishearing(error, mishearing) {
+  function processMishearing(error, mishearing) {
     if (error) {
       console.log(error);
     }
-    else if (text === mishearing) {
-      console.log('Could not mishear', text);
+    else if (!mishearing) {
+      console.log('No mishearing for "' + tweet.text + '".');
+    }
+    else if (mishearing.length > 140) {
+      console.log('Mishearing "' + mishearing + '" is too long.');
     }
     else {
-      var response = 'OH ' + username + ': ' + mishearing;
+      var response = decorateMishearing(mishearing);
+      for (var i = 0; i < 5; ++i) {
+        if (response < 141) {
+          break;
+        }
+        response = decorateMishearing(mishearing);
+      }
+
       if (dryRun) {
         console.log(response);
       }
