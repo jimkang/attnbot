@@ -27,7 +27,9 @@ stream.on('tweet', reactToTweet);
 function reactToTweet(tweet) {
   // console.log(tweet.user.screen_name);
   console.log(tweet.text);
-  attemptToMishear(tweet.text, tweet.user.screen_name);
+  if (tweet.user.screen_name !== 'mishearingbot') {
+    attemptToMishear(tweet.text, tweet.user.screen_name);
+  }
 }
 
 function attemptToMishear(text, username) {
@@ -49,8 +51,17 @@ function attemptToMishear(text, username) {
         var body = {
           status: response
         };
-        twit.post('statuses/update', body, done);
+        twit.post('statuses/update', body, reportPosting);
       }
     }
+  }
+}
+
+function reportPosting(error, data) {
+  if (error) {
+    console.log(error);
+  }
+  else {
+    console.log('Posted', data.text);
   }
 }
