@@ -8,7 +8,7 @@ Installation
 
 Clone this repo.
 
-Then, create a `config.js` file in the project root that contains [Twitter API keys](https://gist.github.com/jimkang/34d16247b40097d8cace) and [Wordnik API key](http://developer.wordnik.com/). Example:
+Then, create a `config.js` file in the project root that contains [Twitter API keys](https://gist.github.com/jimkang/34d16247b40097d8cace). Example:
 
     module.exports = {
       twitter: {
@@ -27,6 +27,10 @@ Usage
 To run just `mishearText` on the command line:
 
     node tools/run-mishear-text.js "Your text to be misheard here."
+
+Or:
+
+    make try TEXT="Your text to be misheard here."
 
 License
 -------

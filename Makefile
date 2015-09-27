@@ -22,3 +22,6 @@ post-receive: sync-worktree-to-git npm-install stop start
 
 pushall:
 	git push origin master && npm publish
+
+try:
+	node tools/run-mishear-text.js "$(TEXT)"

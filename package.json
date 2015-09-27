@@ -23,6 +23,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "call-next-tick": "^1.1.2",
+    "get-popular-tweets": "^1.0.1",
     "homophonizer": "^1.0.1",
     "lodash": "^3.10.1",
     "mishear-phrase": "^1.0.5",
