@@ -29,6 +29,7 @@ function decorateMishearing(text, url) {
   if (url) {
     decorated += (' ' + url);
   }
+  return decorated;
 }
 
 module.exports = decorateMishearing;
