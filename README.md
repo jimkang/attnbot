@@ -3,6 +3,11 @@ mishearing-bot
 
 A bot that doesn't always hear things correctly.
 
+Or: ALIEN PRETENDING TO BE HUMAN BOT.
+
+- Get from public timeline.
+- Only mishear nouns and verbs.
+
 Installation
 ------------
 

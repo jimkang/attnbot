@@ -2,11 +2,11 @@ var probable = require('probable');
 
 var decorators = [
   {
-    prefix: 'I\'ve heard that "',
-    suffix: '"'
+    prefix: 'Oh, yeah, right – ',
+    suffix: ''
   },
   {
-    prefix: 'OH: ',
+    prefix: 'Of course! Everyone knows that ',
     suffix: ''
   },
   {
@@ -14,18 +14,21 @@ var decorators = [
     suffix: '" – or so I\'ve heard!'
   },
   {
-    prefix: 'ITEM! "',
-    suffix: '"'
+    prefix: 'Yeah, yeah – ',
+    suffix: 'Exactly.'
   },
-  {
-    prefix: 'It\'s my understanding that "',
-    suffix: '"'
-  },
+  // {
+  //   prefix: 'It\'s my understanding that "',
+  //   suffix: '"'
+  // },
 ];
 
-function decorateMishearing(text) {
+function decorateMishearing(text, url) {
   var decorator = probable.pickFromArray(decorators);
-  return decorator.prefix + text + decorator.suffix;
+  var decorated = decorator.prefix + text + decorator.suffix;
+  if (url) {
+    decorated += (' ' + url);
+  }
 }
 
 module.exports = decorateMishearing;
