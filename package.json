@@ -26,8 +26,10 @@
     "get-popular-tweets": "^1.0.1",
     "homophonizer": "^1.0.1",
     "lodash": "^3.10.1",
-    "mishear-phrase": "^1.0.5",
+    "mishear-phrase": "^1.0.7",
+    "nodemw": "^0.7.3",
     "probable": "^1.7.0",
-    "twit": "^1.1.20"
+    "twit": "^1.1.20",
+    "wordpos": "^0.1.15"
   }
 }
