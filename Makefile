@@ -25,3 +25,6 @@ pushall:
 
 try:
 	node tools/run-mishear-text.js "$(TEXT)"
+
+run-mishear-popular:
+	node mishear-popular-tweet.js
