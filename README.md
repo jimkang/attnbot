@@ -1,12 +1,7 @@
-mishearing-bot
+not-an-alien-bot
 ==================
 
-A bot that doesn't always hear things correctly.
-
-Or: ALIEN PRETENDING TO BE HUMAN BOT.
-
-- Get from public timeline.
-- Only mishear nouns and verbs.
+A bot that definitely is not an alien pretending to be human.
 
 Installation
 ------------

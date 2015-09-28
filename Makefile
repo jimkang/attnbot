@@ -1,14 +1,14 @@
 HOMEDIR = $(shell pwd)
-GITDIR = /var/repos/mishearing-bot.git
+GITDIR = /var/repos/not-an-alien-bot.git
 
 test:
 	node tests/mishear-tests.js
 
 start:
-	psy start -n mishearing-bot -- node mishearing-bot.js
+	psy start -n not-an-alien-bot -- node not-an-alien-bot.js
 
 stop:
-	psy stop mishearing-bot || echo "Non-zero return code is OK."
+	psy stop not-an-alien-bot || echo "Non-zero return code is OK."
 
 sync-worktree-to-git:
 	git --work-tree=$(HOMEDIR) --git-dir=$(GITDIR) checkout -f
