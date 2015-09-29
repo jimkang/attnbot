@@ -2,7 +2,7 @@ HOMEDIR = $(shell pwd)
 GITDIR = /var/repos/not-an-alien-bot.git
 
 test:
-	node tests/mishear-tests.js
+	node tests/get-sentences-from-article-tests.js
 
 start:
 	psy start -n not-an-alien-bot -- node not-an-alien-bot.js
@@ -21,7 +21,7 @@ npm-install:
 post-receive: sync-worktree-to-git npm-install stop start
 
 pushall:
-	git push origin master && npm publish
+	git push origin master && git push server master
 
 try:
 	node tools/run-mishear-text.js "$(TEXT)"
