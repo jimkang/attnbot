@@ -35,9 +35,14 @@ var mishearPhrase = MishearPhrase({
 });
 
 function mishearText(text, done) {
-  misheardWordCount = 0;
-  wordsSeen = 0;
-  mishearPhrase(text, done);
+  if (text) {
+    misheardWordCount = 0;
+    wordsSeen = 0;
+    mishearPhrase(text, done);
+  }
+  else {
+    callNextTick(done);
+  }
 }
 
 module.exports = mishearText;

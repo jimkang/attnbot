@@ -2,30 +2,36 @@ var probable = require('probable');
 
 var decorators = [
   {
-    prefix: 'Oh, yeah, right – ',
+    prefix: '',
+    suffix: 'Of course. Everyone knows that!'
+  },
+  {
+    prefix: 'Like every human, I know that',
     suffix: ''
   },
   {
-    prefix: 'Of course! Everyone knows that ',
+    prefix: 'Everyone knows that',
     suffix: ''
   },
   {
-    prefix: '"',
-    suffix: '" – or so I\'ve heard!'
+    prefix: 'Fellow human, it\'s great we both know that',
+    suffix: ''
   },
   {
-    prefix: 'Yeah, yeah – ',
-    suffix: 'Exactly.'
-  },
-  // {
-  //   prefix: 'It\'s my understanding that "',
-  //   suffix: '"'
-  // },
+    prefix: '',
+    suffix: 'Of course I know that! I\'m not some alien!'
+  }
 ];
 
 function decorateMishearing(text, url) {
+  if (!text) {
+    return text;
+  }
   var decorator = probable.pickFromArray(decorators);
-  var decorated = decorator.prefix + text + decorator.suffix;
+  if (decorator.prefix) {
+    text = text.substr(0, 1).toLowerCase() + text.substr(1);
+  }
+  var decorated = decorator.prefix + ' ' +  text + ' ' + decorator.suffix;
   if (url) {
     decorated += (' ' + url);
   }

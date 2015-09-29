@@ -28,3 +28,6 @@ try:
 
 run-mishear-popular:
 	node mishear-popular-tweet.js
+
+run-mishear-fact:
+	node mishear-fact.js

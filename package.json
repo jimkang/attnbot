@@ -25,6 +25,7 @@
     "call-next-tick": "^1.1.2",
     "get-popular-tweets": "^1.0.1",
     "homophonizer": "^1.0.1",
+    "jsonfile": "^2.2.2",
     "lodash": "^3.10.1",
     "mishear-phrase": "^1.0.7",
     "nodemw": "^0.7.3",
