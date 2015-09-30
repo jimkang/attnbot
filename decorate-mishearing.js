@@ -2,24 +2,24 @@ var probable = require('probable');
 
 var decorators = [
   {
-    prefix: '',
-    suffix: 'Of course. Everyone knows that!'
-  },
-  {
-    prefix: 'Like every human, I know that',
+    prefix: 'Yes, yes. Absolutely. I hear you:',
     suffix: ''
   },
   {
-    prefix: 'Everyone knows that',
+    prefix: 'Yup, yup.',
+    suffix: 'Right!'
+  },
+  {
+    prefix: 'I totally agree.',
+    suffix: '100%.'
+  },
+  {
+    prefix: 'Fellow human, it\'s good to hear that. I\'d say the same to you!',
     suffix: ''
   },
   {
-    prefix: 'Fellow human, it\'s great we both know that',
-    suffix: ''
-  },
-  {
-    prefix: '',
-    suffix: 'Of course I know that! I\'m not some alien!'
+    prefix: 'Right!',
+    suffix: 'Everyone knows that.'
   }
 ];
 
