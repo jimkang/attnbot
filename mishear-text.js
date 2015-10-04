@@ -1,8 +1,12 @@
 var callNextTick = require('call-next-tick');
 var MishearPhrase = require('mishear-phrase');
 var probable = require('probable');
-var WordPOS = require('wordpos');
-var wordpos = new WordPOS();
+var createWordnok = require('wordnok').createWordnok;
+var config = require('./config');
+
+var wordnok = createWordnok({
+  apiKey: config.wordnikAPIKey
+});
 
 var misheardWordCount = 0;
 var wordsSeen = 0;
@@ -10,13 +14,15 @@ var wordsSeen = 0;
 var mishearPhrase = MishearPhrase({
   shouldMishearWord: function shouldMishearWord(word, done) {
     if ((wordsSeen < 1 || misheardWordCount < 1) ||
-      1.0 * misheardWordCount / wordsSeen < 0.3) {
+      1.0 * misheardWordCount / wordsSeen < 0.2) {
 
-      wordpos.getPOS(word, testPartOfSpeech);
+      wordnok.getPartsOfSpeech(word, testPartOfSpeech);
 
-      function testPartOfSpeech(posReport) {
-        var isOK = posReport.nouns.length > 0 || posReport.verbs.length > 0;
-          // posReport.adjectives.length > 0 || posReport.adverbs.length > 0;
+      function testPartOfSpeech(error, pos) {
+        console.log(word, pos);
+
+        var isOK = pos.length > 1 && (pos.every(isNoun) || pos.every(isVerb));
+
         if (isOK) {
           misheardWordCount += 1;
         }
@@ -43,6 +49,14 @@ function mishearText(text, done) {
   else {
     callNextTick(done);
   }
+}
+
+function isVerb(partOfSpeech) {
+  return partOfSpeech === 'verb';
+}
+
+function isNoun(partOfSpeech) {
+  return partOfSpeech === 'noun';
 }
 
 module.exports = mishearText;

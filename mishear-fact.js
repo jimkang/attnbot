@@ -28,6 +28,7 @@ async.waterfall(
 
 function pickSentence(article, done) {
   var sentences = getSentencesFromArticle(article);
+  sentences = sentences.filter(isUnder141Chars);
   if (!sentences || sentences.length < 1) {
     callNextTick(done, new Error('Could not get sentences from article.'));
   }
@@ -43,6 +44,9 @@ function pickSentence(article, done) {
 }
 
 function callDecorateMishearing(mishearing, done) {
+  // if (!done && typeof mishearing === 'function') {
+  //   done = mishearing;
+  // }
   callNextTick(done, null, decorateMishearing(mishearing));
 }
 
@@ -66,4 +70,8 @@ function reportDone(error, mishearing) {
     console.log(error);
   }
   console.log(mishearing);
+}
+
+function isUnder141Chars(s) {
+  return s.length < 141;
 }
