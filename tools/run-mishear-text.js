@@ -14,5 +14,6 @@ function logMishearing(error, mishearing) {
   if (error) {
     console.log(error);
   }
-  console.log(decorateMishearing(mishearing));
+  // console.log(decorateMishearing(mishearing));
+  console.log(mishearing);
 }

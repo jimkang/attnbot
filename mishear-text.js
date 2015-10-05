@@ -13,14 +13,12 @@ var wordsSeen = 0;
 
 var mishearPhrase = MishearPhrase({
   shouldMishearWord: function shouldMishearWord(word, done) {
-    if ((wordsSeen < 1 || misheardWordCount < 1) ||
-      1.0 * misheardWordCount / wordsSeen < 0.2) {
+    if (wordsSeen < 1 || misheardWordCount < 1 ||
+      1.0 * misheardWordCount / wordsSeen < 0.3) {
 
       wordnok.getPartsOfSpeech(word, testPartOfSpeech);
 
       function testPartOfSpeech(error, pos) {
-        console.log(word, pos);
-
         var isOK = pos.length > 1 && (pos.every(isNoun) || pos.every(isVerb));
 
         if (isOK) {
