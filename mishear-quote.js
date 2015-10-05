@@ -58,6 +58,10 @@ function postMishearing(textMishearing, done) {
 
   text += ('\n--' + selectedQuote.author);
 
+  if (text.length < 140 - 5) {
+    text = 'FWD: ' + text;
+  }
+
   if (dryRun) {
     callNextTick(done, null, text);
   }
