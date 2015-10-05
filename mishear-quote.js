@@ -61,6 +61,7 @@ function postMishearing(textMishearing, done) {
       var body = {
         status: text
       };
+      console.log(body);
       twit.post('statuses/update', body, done);
     }
   }

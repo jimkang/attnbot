@@ -29,7 +29,8 @@ function getLine(done) {
       line = lines[0];
       var parts = line.split(';');
       if (parts[0].length + parts[1].length + 3 > 140) {
-        callNextTick(getLine, done);
+        // callNextTick(getLine, done);
+        done(new Error('Could not get line under 140 characters.'));
       }
       else {
         done(error, line);
