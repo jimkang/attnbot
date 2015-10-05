@@ -31,3 +31,10 @@ run-mishear-popular:
 
 run-mishear-fact:
 	node mishear-fact.js
+
+build-quotes-offsets:
+	./node_modules/.bin/get-file-line-offsets-in-json data/quotes_all.csv \
+		> data/quotes-offsets.json
+
+run-mishear-quote:
+	node mishear-quote.js
