@@ -45,7 +45,7 @@ function mishearText(text, done) {
     mishearPhrase(text, done);
   }
   else {
-    callNextTick(done);
+    callNextTick(done, new Error('No text provided to mishearText.'));
   }
 }
 

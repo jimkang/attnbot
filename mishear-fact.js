@@ -20,7 +20,7 @@ async.waterfall(
     getRandomArticle,
     pickSentence,
     mishearText,
-    callDecorateMishearing,
+    // callDecorateMishearing,
     postMishearing
   ],
   reportDone

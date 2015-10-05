@@ -13,7 +13,7 @@ if (process.argv.length > 2) {
 
 var twit = new Twit(config.twitter);
 
-var author;
+var selectedQuote;
 
 async.waterfall(
   [
@@ -34,39 +34,39 @@ async.waterfall(
 // }
 
 function passQuoteText(quote, done) {
-  author = quote.author;
-  callNextTick(done, null, quote.text);
+  if (!quote || !quote.text) {
+    done(new Error('No quote given.'));
+  }
+  else if (quote.text.length + quote.author.length + 3 > 140) {
+    done(new Error('Could not get line under 140 characters.'));
+  }
+  else {
+    selectedQuote = quote;
+    callNextTick(done, null, selectedQuote.text);
+  }
 }
 
 function postMishearing(textMishearing, done) {
-  if (!textMishearing || typeof textMishearing !== 'string') {
-    if (!done && typeof textMishearing === 'function') {
-      done = textMishearing;
-    }
-    callNextTick(done, new Error('Could not get a mishearing.'));
+  var text;
+  var allowableLength = 140 - selectedQuote.author.length - 3;
+  if (textMishearing.length > allowableLength) {
+    text = textMishearing.substr(0, allowableLength - 1) + '…';
   }
   else {
-    var text;
-    var allowableLength = 140 - author.length - 3;
-    if (textMishearing.length > allowableLength) {
-      text = textMishearing.substr(0, allowableLength - 1) + '…';
-    }
-    else {
-      text = textMishearing;
-    }
+    text = textMishearing;
+  }
 
-    text += ('\n--' + author);
+  text += ('\n--' + selectedQuote.author);
 
-    if (dryRun) {
-      callNextTick(done, null, text);
-    }
-    else {
-      var body = {
-        status: text
-      };
-      console.log(body);
-      twit.post('statuses/update', body, done);
-    }
+  if (dryRun) {
+    callNextTick(done, null, text);
+  }
+  else {
+    var body = {
+      status: text
+    };
+    console.log(body);
+    twit.post('statuses/update', body, done);
   }
 }
 
