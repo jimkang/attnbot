@@ -40,6 +40,9 @@ function passQuoteText(quote, done) {
 
 function postMishearing(textMishearing, done) {
   if (!textMishearing || typeof textMishearing !== 'string') {
+    if (!done && typeof textMishearing === 'function') {
+      done = textMishearing;
+    }
     callNextTick(done, new Error('Could not get a mishearing.'));
   }
   else {
