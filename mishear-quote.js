@@ -39,7 +39,7 @@ function passQuoteText(quote, done) {
 }
 
 function postMishearing(textMishearing, done) {
-  if (!textMishearing) {
+  if (!textMishearing || typeof textMishearing !== 'string') {
     callNextTick(done, new Error('Could not get a mishearing.'));
   }
   else {
