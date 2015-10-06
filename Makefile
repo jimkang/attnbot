@@ -1,5 +1,5 @@
 HOMEDIR = $(shell pwd)
-GITDIR = /var/repos/not-an-alien-bot.git
+GITDIR = /Users/jimkang/gcw/mishearing-bot.git
 
 test:
 	node tests/get-sentences-from-article-tests.js

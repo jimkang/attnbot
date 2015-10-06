@@ -15,16 +15,18 @@ var twit = new Twit(config.twitter);
 
 var selectedQuote;
 
-async.waterfall(
-  [
-    getRandomQuote,
-    passQuoteText,
-    mishearText,
-    // callDecorateMishearing,
-    postMishearing
-  ],
-  reportDone
-);
+function runAttempt() {
+  async.waterfall(
+    [
+      getRandomQuote,
+      passQuoteText,
+      mishearText,
+      // callDecorateMishearing,
+      postMishearing
+    ],
+    reportDone
+  );
+}
 
 // function callDecorateMishearing(mishearing, done) {
 //   // if (!done && typeof mishearing === 'function') {
@@ -58,9 +60,9 @@ function postMishearing(textMishearing, done) {
 
   text += ('\n--' + selectedQuote.author);
 
-  if (text.length < 140 - 5) {
-    text = 'FWD: ' + text;
-  }
+  // if (text.length < 140 - 5) {
+  //   text = 'FWD: ' + text;
+  // }
 
   if (dryRun) {
     callNextTick(done, null, text);
@@ -77,10 +79,16 @@ function postMishearing(textMishearing, done) {
 function reportDone(error, mishearing) {
   if (error) {
     console.log(error);
+    console.log('Retrying.');
+    callNextTick(runAttempt);
   }
-  console.log(mishearing);
+  else {
+    console.log(mishearing);
+  }
 }
 
 function isUnder141Chars(s) {
   return s.length < 141;
 }
+
+runAttempt();
