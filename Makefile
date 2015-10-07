@@ -38,3 +38,21 @@ build-quotes-offsets:
 
 run-mishear-quote:
 	node mishear-quote.js
+
+start-docker-machine:
+	docker-machine create --driver virtualbox dev
+
+connect-to-docker-machine:
+	echo "Run 'eval "$(docker-machine env dev)"'"
+
+build-docker-image:
+	docker build .
+
+#save-docker-image:
+#	docker commit 16498c232572 localhost:5000:mishearing-bot
+
+#tag-docker-image:
+#	docker tag a6c460bacf99 mishearing-bot
+
+run-docker-image:
+	docker run -d mishearing-bot
