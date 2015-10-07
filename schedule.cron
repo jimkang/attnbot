@@ -1,3 +1,3 @@
 # mishearing-bot stuff
 # 40 * * * * cd /var/www/not-an-alien-bot && make run-mishear-fact
-10,20,25,30,40 * * * * cd /var/www/not-an-alien-bot && make run-mishear-quote
+56,26 * * * * cd /var/www/not-an-alien-bot && make run-mishear-quote
