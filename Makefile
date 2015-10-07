@@ -49,10 +49,10 @@ build-docker-image:
 	docker build .
 
 #save-docker-image:
-#	docker commit 16498c232572 localhost:5000:mishearing-bot
+#	docker commit 16498c232572
 
 #tag-docker-image:
 #	docker tag a6c460bacf99 mishearing-bot
 
 run-docker-image:
-	docker run -d mishearing-bot
+	docker run -d mishearing-bot cron -f
