@@ -1,22 +1,22 @@
 {
-  "name": "not-an-alien-bot",
+  "name": "paying-attention-bot",
   "version": "1.0.0",
-  "description": "A bot that definitely is not an alien pretending to be human.",
+  "description": "A bot that definitely paying attention and knows exactly what you and everything else said.",
   "main": "index.js",
   "scripts": {
     "test": "make test"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:jimkang/not-an-alien-bot.git"
+    "url": "git@github.com:jimkang/paying-attention-bot.git"
   },
   "keywords": [],
   "author": "Jim Kang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jimkang/not-an-alien-bot/issues"
+    "url": "https://github.com/jimkang/paying-attention-bot/issues"
   },
-  "homepage": "https://github.com/jimkang/not-an-alien-bot",
+  "homepage": "https://github.com/jimkang/paying-attention-bot",
   "devDependencies": {
     "get-file-line-offsets-in-json": "^1.0.0",
     "tape": "^3.0.3"

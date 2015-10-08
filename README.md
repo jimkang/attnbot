@@ -1,7 +1,7 @@
-not-an-alien-bot
+paying-attention-bot
 ==================
 
-A bot that definitely is not an alien pretending to be human.
+A bot that definitely paying attention and knows exactly what you and everything else said.
 
 Installation
 ------------

@@ -1,14 +1,14 @@
 HOMEDIR = $(shell pwd)
-GITDIR = /Users/jimkang/gcw/mishearing-bot.git
+GITDIR = /Users/jimkang/gcw/paying-attention-bot.git
 
 test:
 	node tests/get-sentences-from-article-tests.js
 
 start:
-	psy start -n not-an-alien-bot -- node not-an-alien-bot.js
+	psy start -n paying-attention-bot -- node paying-attention-bot.js
 
 stop:
-	psy stop not-an-alien-bot || echo "Non-zero return code is OK."
+	psy stop paying-attention-bot || echo "Non-zero return code is OK."
 
 sync-worktree-to-git:
 	git --work-tree=$(HOMEDIR) --git-dir=$(GITDIR) checkout -f
