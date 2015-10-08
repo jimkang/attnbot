@@ -1,3 +1,4 @@
 # mishearing-bot stuff
-# 40 * * * * cd /var/www/not-an-alien-bot && make run-mishear-fact
-56,26 * * * * cd /var/www/not-an-alien-bot && make run-mishear-quote
+15,50,56,26 * * * * cd /usr/src/app && make run-mishear-quote
+# * * * * * echo "Hello world" >> /var/log/cron.log 2>&1
+

@@ -45,14 +45,17 @@ start-docker-machine:
 connect-to-docker-machine:
 	echo "Run 'eval "$(docker-machine env dev)"'"
 
-build-docker-image:
-	docker build .
+build-docker-cron-image:
+	docker build -t jkang/paying-attention-cron .
 
 #save-docker-image:
 #	docker commit 16498c232572
 
 #tag-docker-image:
-#	docker tag a6c460bacf99 mishearing-bot
+#	docker tag a6c460bacf99 paying-attention-bot
 
-run-docker-image:
-	docker run -d mishearing-bot cron -f
+run-docker-cron-image:
+	docker run -d --name paying-attention-cron jkang/paying-attention-cron
+
+copy-config-to-container:
+	docker cp config.js paying-attention-cron:/usr/src/app
