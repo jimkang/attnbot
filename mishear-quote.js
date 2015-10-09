@@ -1,6 +1,6 @@
 var getRandomQuote = require('./get-random-quote');
 var mishearText = require('./mishear-text');
-var config = require('./config');
+var config = require('./config/config');
 var async = require('async');
 var callNextTick = require('call-next-tick');
 var probable = require('probable');

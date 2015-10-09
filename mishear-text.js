@@ -2,7 +2,7 @@ var callNextTick = require('call-next-tick');
 var MishearPhrase = require('mishear-phrase');
 var probable = require('probable');
 var createWordnok = require('wordnok').createWordnok;
-var config = require('./config');
+var config = require('./config/config');
 
 var wordnok = createWordnok({
   apiKey: config.wordnikAPIKey
