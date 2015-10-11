@@ -1,5 +1,5 @@
 var getPopularTweets = require('get-popular-tweets');
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 var decorateMishearing = require('./decorate-mishearing');
 var config = require('./config/config');
 var async = require('async');
@@ -12,17 +12,22 @@ if (process.argv.length > 2) {
   dryRun = (process.argv[2].toLowerCase() == '--dry');
 }
 
-var twit = new Twit(config.twitter);
+var attempts = 0;
 
-async.waterfall(
-  [
-    getTweets,
-    pickTweet,
-    mishearTweet,
-    postMishearing
-  ],
-  reportDone
-);
+var twit = new Twit(config.twitter);
+var mishearText = MishearText();
+
+function runAttempt() {
+  async.waterfall(
+    [
+      getTweets,
+      pickTweet,
+      mishearTweet,
+      postMishearing
+    ],
+    reportDone
+  );
+}
 
 function getTweets(done) {
   var opts = {
@@ -48,7 +53,8 @@ function mishearTweet(tweet, done) {
       done(error);
     }
     else {
-      done(error, decorateMishearing(mishearing, tweet.url));
+      // done(error, decorateMishearing(mishearing, tweet.url));
+      done(error, mishearing);
     }
   }
 }
@@ -57,21 +63,40 @@ function postMishearing(mishearing, done) {
   if (!mishearing) {
     callNextTick(done, new Error('Could not get a mishearing.'));
   }
-  else if (dryRun) {
-    console.log(mishearing);
-    callNextTick(done, null, mishearing);
-  }
   else {
-    var body = {
-      status: mishearing
-    };
-    twit.post('statuses/update', body, done);
+    var replyText;
+    if (mishearing.length > 140) {
+      replyText = mishearing.slice(0, 140);
+    }
+    else {
+      replyText = mishearing;
+    }
+    if (dryRun) {
+      console.log(mishearing);
+      callNextTick(done, null, mishearing);
+    }
+    else {
+      var body = {
+        status: replyText
+      };
+      twit.post('statuses/update', body, done);
+    }
   }
 }
 
 function reportDone(error, mishearing) {
+  attempts += 1;
+
   if (error) {
     console.log(error);
+    if (attempts < 10 &&
+      error.message === 'Could not come up with a mishearing.') {
+
+      console.log('Retrying.');
+      callNextTick(runAttempt);
+    }   
   }
   console.log(mishearing);
 }
+
+runAttempt();

@@ -1,5 +1,5 @@
 var getRandomQuote = require('./get-random-quote');
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 var config = require('./config/config');
 var async = require('async');
 var callNextTick = require('call-next-tick');
@@ -12,6 +12,8 @@ if (process.argv.length > 2) {
 }
 
 var twit = new Twit(config.twitter);
+
+var mishearText = MishearText();
 
 var selectedQuote;
 

@@ -1,13 +1,17 @@
 var createMicroserver = require('slack-webhook-microserver');
 var callNextTick = require('call-next-tick');
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 var decorateMishearing = require('./decorate-mishearing');
+var simpleShouldMishearWord = require('./simple-should-mishear-word');
 
 var port = process.env.PORT;
 if (!port) {
   port = 5678;
 }
 
+var mishearText = MishearText({
+  shouldMishearWord: simpleShouldMishearWord
+});
 var lastThingSaid;
 
 function getResponse(params, done) {

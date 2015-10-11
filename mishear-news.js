@@ -1,4 +1,4 @@
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 var config = require('./config/config');
 var callNextTick = require('call-next-tick');
 var Twit = require('twit');
@@ -15,6 +15,7 @@ if (process.argv.length > 2) {
 }
 
 var twit = new Twit(config.twitter);
+var mishearText = MishearText();
 
 var usedHeadlines = [];
 

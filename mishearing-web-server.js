@@ -2,12 +2,17 @@ var http = require('http');
 var url = require('url');
 var qs = require('qs');
 var _ = require('lodash');
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 var decorateMishearing = require('./decorate-mishearing');
+var simpleShouldMishearWord = require('./simple-should-mishear-word');
 
 var port = 7575;
 
 console.log('The mishearing web server is running.');
+
+var mishearText = MishearText({
+  shouldMishearWord: simpleShouldMishearWord
+});
 
 // TODO: Put this function in its own module.
 function takeRequest(req, res) {

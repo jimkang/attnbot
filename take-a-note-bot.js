@@ -1,15 +1,20 @@
 var config = require('./config/config');
 var callNextTick = require('call-next-tick');
 var Twit = require('twit');
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 // var decorateMishearing = require('./decorate-mishearing');
 var betterKnow = require('better-know-a-tweet');
 var isCool = require('iscool')();
+var simpleShouldMishearWord = require('./simple-should-mishear-word');
 
 var dryRun = false;
 if (process.argv.length > 2) {
   dryRun = (process.argv[2].toLowerCase() == '--dry');
 }
+
+var mishearText = MishearText({
+  shouldMishearWord: simpleShouldMishearWord
+});
 
 var botUsername = 'gr8_note_taker';
 var twit = new Twit(config.twitter);
@@ -18,14 +23,14 @@ var stream = twit.stream('user');
 stream.on('tweet', reactToTweet);
 
 function reactToTweet(tweet) {
-  // console.log(tweet.user.screen_name);
-  // console.log(tweet.text);
+  var attribution;
+
   if (tweet.user.screen_name !== botUsername) {
     var mentioned = betterKnow.whosInTheTweet(tweet).slice(1);
-    debugger;
     if (mentioned.length > 0 && mentioned[0] === botUsername &&
       isCool(tweet.text)) {
 
+      attribution = 'Note from @' + tweet.user.screen_name + ': ';
       var tweetText = tweet.text.replace('@' + botUsername + ' ', '');
       mishearText(tweetText, processMishearing);
     }
@@ -45,6 +50,10 @@ function reactToTweet(tweet) {
     }
     else {
       replyText = mishearing;
+    }
+
+    if (replyText.length + attribution.length < 141) {
+      replyText = attribution + replyText;
     }
 
     if (dryRun) {

@@ -26,18 +26,27 @@ pushall: build-docker-image push-docker-image
 try:
 	node tools/run-mishear-text.js "$(TEXT)"
 
-run-mishear-popular:
+mishear-popular:
 	node mishear-popular-tweet.js
 
-run-mishear-fact:
+mishear-fact:
 	node mishear-fact.js
 
 build-quotes-offsets:
 	./node_modules/.bin/get-file-line-offsets-in-json data/quotes_all.csv \
 		> data/quotes-offsets.json
 
-run-mishear-quote:
+mishear-quote:
 	node mishear-quote.js
+
+mishear-news:
+	node mishear-news.js
+
+run-note-taker:
+	psy start --name note-taker node take-a-note-bot.js
+
+run-api:
+	psy start --name mishear-api node mishearing-web-server.js
 
 start-docker-machine:
 	docker-machine create --driver virtualbox dev
@@ -60,3 +69,4 @@ push-docker-image:
 run-docker-image:
 	docker run -v $(HOMEDIR)/config:/usr/src/app/config \
 		jkang/attnbot make run-mishear-quote
+

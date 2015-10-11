@@ -1,6 +1,6 @@
 var getRandomArticle = require('./get-random-article');
 var getSentencesFromArticle = require('./get-sentences-from-article');
-var mishearText = require('./mishear-text');
+var MishearText = require('./mishear-text');
 var decorateMishearing = require('./decorate-mishearing');
 var config = require('./config/config');
 var async = require('async');
@@ -12,7 +12,7 @@ var dryRun = false;
 if (process.argv.length > 2) {
   dryRun = (process.argv[2].toLowerCase() == '--dry');
 }
-
+var mishearText = MishearText();
 var twit = new Twit(config.twitter);
 
 async.waterfall(

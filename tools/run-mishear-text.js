@@ -1,4 +1,4 @@
-var mishearText = require('../mishear-text');
+var MishearText = require('../mishear-text');
 var decorateMishearing = require('../decorate-mishearing');
 
 if (process.argv.length < 3) {
@@ -6,6 +6,7 @@ if (process.argv.length < 3) {
   process.exit();
 }
 
+var mishearText = MishearText();
 var text = process.argv[2];
 
 mishearText(text, logMishearing);
