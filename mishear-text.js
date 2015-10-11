@@ -14,8 +14,10 @@ var maxMisheard = 0;
 
 var mishearPhrase = MishearPhrase({
   shouldMishearWord: function shouldMishearWord(word, done) {
-    if (misheardWordCount < maxMisheard &&
-     (wordsSeen < 1 || 1.0 * misheardWordCount / wordsSeen < 0.2)) {
+    callNextTick(done, null, true);
+    return;
+    // if (misheardWordCount < maxMisheard &&
+    //  (wordsSeen < 1 || 1.0 * misheardWordCount / wordsSeen < 0.7)) {
 
       wordnok.getPartsOfSpeech(word, testPartOfSpeech);
 
@@ -28,11 +30,11 @@ var mishearPhrase = MishearPhrase({
         wordsSeen += 1;
         done(null, isOK);
       }
-    }
-    else {
-      wordsSeen += 1;
-      callNextTick(done, null, false);
-    }
+    // }
+    // else {
+    //   wordsSeen += 1;
+    //   callNextTick(done, null, false);
+    // }
   },
   pickMishearing: function pickMishearing(mishearings, done) {
     callNextTick(done, null, probable.pickFromArray(mishearings));
@@ -42,7 +44,7 @@ var mishearPhrase = MishearPhrase({
 function mishearText(text, done) {
   if (text) {
     var wordTotal = text.split(' ').length;
-    maxMisheard = Math.round(wordTotal / 8);
+    maxMisheard = Math.round(wordTotal / 2);
     if (maxMisheard < 1) {
       maxMisheard = 1;
     }
