@@ -87,8 +87,4 @@ function reportDone(error, mishearing) {
   }
 }
 
-function isUnder141Chars(s) {
-  return s.length < 141;
-}
-
 runAttempt();
