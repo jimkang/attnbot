@@ -20,8 +20,8 @@ npm-install:
 
 post-receive: sync-worktree-to-git npm-install
 
-pushall:
-	git push origin master && git push server master
+pushall: build-docker-image push-docker-image
+	git push origin master
 
 try:
 	node tools/run-mishear-text.js "$(TEXT)"
@@ -47,6 +47,9 @@ connect-to-docker-machine:
 
 build-docker-image:
 	docker build -t jkang/attnbot .
+
+push-docker-image:
+	docker push jkang/attnbot
 
 #save-docker-image:
 #	docker commit 16498c232572
