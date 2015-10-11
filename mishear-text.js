@@ -10,11 +10,12 @@ var wordnok = createWordnok({
 
 var misheardWordCount = 0;
 var wordsSeen = 0;
+var maxMisheard = 0;
 
 var mishearPhrase = MishearPhrase({
   shouldMishearWord: function shouldMishearWord(word, done) {
-    if (wordsSeen < 1 || misheardWordCount < 1 ||
-      1.0 * misheardWordCount / wordsSeen < 0.3) {
+    if (misheardWordCount < maxMisheard &&
+     (wordsSeen < 1 || 1.0 * misheardWordCount / wordsSeen < 0.2)) {
 
       wordnok.getPartsOfSpeech(word, testPartOfSpeech);
 
@@ -40,6 +41,11 @@ var mishearPhrase = MishearPhrase({
 
 function mishearText(text, done) {
   if (text) {
+    var wordTotal = text.split(' ').length;
+    maxMisheard = Math.round(wordTotal / 8);
+    if (maxMisheard < 1) {
+      maxMisheard = 1;
+    }
     misheardWordCount = 0;
     wordsSeen = 0;
     mishearPhrase(text, done);
