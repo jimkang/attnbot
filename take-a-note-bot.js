@@ -25,8 +25,11 @@ stream.on('tweet', reactToTweet);
 function reactToTweet(tweet) {
   var attribution;
 
-  if (tweet.user.screen_name !== botUsername) {
+  if (tweet.user.screen_name !== botUsername &&
+    !betterKnow.isRetweetOfUser(botUsername, tweet)) {
+
     var mentioned = betterKnow.whosInTheTweet(tweet).slice(1);
+
     if (mentioned.length > 0 && mentioned[0] === botUsername &&
       isCool(tweet.text)) {
 
