@@ -1,7 +1,9 @@
-FROM nodesource/trusty:4.1.1
+FROM jkang/headporters
 
-# Add your source files
 # cwd is /usr/src/app
 # cache package.json (included in .) and node_modules to speed up builds
-ADD . .
+ADD package.json package.json
 RUN npm install
+
+# Add source files
+ADD . .
