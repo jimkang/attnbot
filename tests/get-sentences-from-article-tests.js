@@ -29,7 +29,24 @@ var testCases = [
       'A mole is simply a unit of the number of things.',
       'Units are invented when existing units can not describe something well enough.',
       'Chemical reactions often take place at levels where using grams wouldn\'t make sense, yet using absolute numbers of atoms/molecules/ions would be confusing, too.'
-    ]
+    ],
+  },
+  {
+    article: fs.readFileSync(__dirname + '/data/salinger.txt', readOpts),
+    sentences: [
+      'Salinger was born Jerome David Salinger in Manhattan, New York on January 1, 1919.',
+      'Salinger began writing short stories while in secondary school.',
+      'In 1936, he went to work in Austria, but left 2 years later, just before Germany took Austria over.',
+      'Salinger published several stories in the early 1940s before serving in World War II.',
+      'In 1948 he published the story "A Perfect Day for Bananafish" in \'\'The New Yorker\'\' magazine, which also published most of his following work.',
+      '=J.',
+      'D.',
+      '=Why did J D Salinger spend the last 60 years hiding in a shed writing love notes to teenage girls?',
+      'Despite What.CD\'s quick response, Salinger\'s unpublished writings will forever be available on the internet.',
+      '*{{cite book =Kubica =Chris = =Hochman, Will =Letters to J.D.',
+      '*Salinger, Margaret 2000.',
+      '\'\'Dream catcher: reflections on reclusion\'\'.',
+      'Scribner, N.Y.' ]
   }
 ];
 
