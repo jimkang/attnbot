@@ -37,7 +37,7 @@ function getSnippet(done) {
   );
 }
 
-var attribution =  '\n\n--Shakespeare';
+var attribution = ' –W. S.';
 
 function postMishearing(text, done) {
   if (text.length > 140) {
