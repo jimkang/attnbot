@@ -1,0 +1,21 @@
+// http://labs.bible.org/api/?passage=random format.
+var verseRegExp = /<b>(.*)<\/b>\s+(.*)/;
+
+function parseVerse(verse) {
+  var result = verse.match(verseRegExp);
+  var parsed;
+
+  if (result && result.length === 3) {
+    var captured = result.slice(1);
+    parsed = {
+      citation: captured[0],
+      text: captured[1]
+    };
+
+    parsed.text = parsed.text.replace(/&#8211;/g, '\u2013');
+  }
+
+  return parsed;
+}
+
+module.exports = parseVerse;

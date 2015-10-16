@@ -45,6 +45,9 @@ mishear-news:
 mishear-shakespeare:
 	node mishear-shakespeare.js
 
+mishear-bible:
+	node mishear-bible.js
+
 run-note-taker:
 	psy start --name note-taker node take-a-note-bot.js
 
