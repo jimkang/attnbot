@@ -54,11 +54,17 @@ run-note-taker:
 run-api:
 	psy start --name mishear-api node mishearing-web-server.js
 
+stop-docker-machine:
+	docker-machine stop dev
+
 start-docker-machine:
+	docker-machine start dev
+
+create-docker-machine:
 	docker-machine create --driver virtualbox dev
 
 connect-to-docker-machine:
-	echo "Run 'eval "$(docker-machine env dev)"'"
+	eval "$(docker-machine env dev)"
 
 build-docker-image:
 	docker build -t jkang/attnbot .
