@@ -12,6 +12,12 @@ var misheardWordCount = 0;
 var wordsSeen = 0;
 var maxMisheard = 0;
 
+var doNotMishearList = [
+  'will',
+  'love',
+  'can\'t'
+];
+
 function MishearText(opts) {
   var shouldMishearWord;
 
@@ -24,7 +30,12 @@ function MishearText(opts) {
       if (misheardWordCount < maxMisheard &&
        (wordsSeen < 1 || 1.0 * misheardWordCount / wordsSeen < 0.7)) {
 
-        wordnok.getPartsOfSpeech(word, testPartOfSpeech);
+        if (doNotMishearList.indexOf(word.toLowerCase()) !== -1) {
+          callNextTick(done, null, false);
+        }
+        else {
+          wordnok.getPartsOfSpeech(word, testPartOfSpeech);
+        }
 
         function testPartOfSpeech(error, pos) {
           var isOK = pos.length > 1 && (pos.every(isNoun) || pos.every(isVerb));
